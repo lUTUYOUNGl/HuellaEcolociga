@@ -14,6 +14,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
 
         .container {
@@ -80,13 +81,63 @@
         button:hover {
             background-color: #004d40;
         }
+
+        /* Panel de Admin */
+        #admin-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: none; /* Inicialmente oculto */
+        }
+
+        /* Cuadro Invisible para la contraseña */
+        #password-box {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 200px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #00796b;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        #password-box input {
+            padding: 5px;
+            width: 150px;
+        }
+
+        #password-box button {
+            background-color: #00796b;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #password-box button:hover {
+            background-color: #004d40;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Cuadro Invisible para la Contraseña -->
+    <div id="password-box">
+        <input type="password" id="password-input" placeholder="Introduce la contraseña">
+        <button onclick="checkPassword()">Acceder</button>
+    </div>
+
     <div class="container">
         <h1>Encuesta sobre Huella Ecológica</h1>
-        
+
         <!-- Formulario de Registro -->
         <div class="form-section">
             <label for="name">¿Cuál es tu nombre?</label>
@@ -95,7 +146,7 @@
 
         <!-- Encuesta -->
         <div class="questions">
-            <form id="survey-form">
+            <form id="survey-form" onsubmit="submitSurvey(event)">
                 <div class="question">
                     <label>¿Con qué frecuencia utilizas transporte público o compartido?</label>
                     <input type="radio" id="transporte1" name="transporte" value="a diario" required> A diario
@@ -132,6 +183,75 @@
             </form>
         </div>
     </div>
+
+    <!-- Panel de Admin con las respuestas -->
+    <div id="admin-panel">
+        <h3>Panel de Admin - Respuestas de Encuesta</h3>
+        <ul id="survey-records"></ul>
+    </div>
+
+    <script>
+        // Array para almacenar respuestas
+        let surveyRecords = JSON.parse(localStorage.getItem('surveyRecords')) || [];
+
+        // Función para manejar el envío de la encuesta
+        function submitSurvey(event) {
+            event.preventDefault();
+            const form = event.target;
+
+            // Obtener respuestas de la encuesta
+            const name = document.getElementById('name').value;
+            const transporte = form.transporte.value;
+            const carne = form.carne.value;
+            const reciclaje = form.reciclaje.value;
+            const energia = form.energia.value;
+
+            // Crear un objeto con las respuestas
+            const surveyData = {
+                name,
+                transporte,
+                carne,
+                reciclaje,
+                energia
+            };
+
+            // Guardar en el array
+            surveyRecords.push(surveyData);
+
+            // Guardar en localStorage
+            localStorage.setItem('surveyRecords', JSON.stringify(surveyRecords));
+
+            // Mostrar mensaje de agradecimiento
+            alert('Gracias por tu participación');
+
+            // Limpiar el formulario
+            form.reset();
+        }
+
+        // Función para comprobar la contraseña e ingresar al panel de admin
+        function checkPassword() {
+            const passwordInput = document.getElementById('password-input').value;
+            if (passwordInput === 'LOL') {
+                document.getElementById('admin-panel').style.display = 'block';
+                document.getElementById('password-box').style.display = 'none';
+                displaySurveyRecords();
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        }
+
+        // Mostrar las respuestas almacenadas en el panel de admin
+        function displaySurveyRecords() {
+            const surveyList = document.getElementById('survey-records');
+            surveyList.innerHTML = ''; // Limpiar lista existente
+
+            surveyRecords.forEach((record, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Encuesta #${index + 1} - ${record.name}: Transporte: ${record.transporte}, Carne: ${record.carne}, Reciclaje: ${record.reciclaje}, Energía: ${record.energia}`;
+                surveyList.appendChild(listItem);
+            });
+        }
+    </script>
 
 </body>
 </html>
