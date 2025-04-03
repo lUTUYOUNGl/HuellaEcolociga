@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta sobre Huella Ecológica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #00695c;
+            text-align: center;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #00796b;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #00796b;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .questions {
+            margin-top: 30px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question label {
+            font-size: 16px;
+            display: block;
+        }
+
+        .question input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Encuesta sobre Huella Ecológica</h1>
+        
+        <!-- Formulario de Registro -->
+        <div class="form-section">
+            <label for="name">¿Cuál es tu nombre?</label>
+            <input type="text" id="name" name="name" placeholder="Ingresa tu nombre" required>
+        </div>
+
+        <!-- Encuesta -->
+        <div class="questions">
+            <form id="survey-form">
+                <div class="question">
+                    <label>¿Con qué frecuencia utilizas transporte público o compartido?</label>
+                    <input type="radio" id="transporte1" name="transporte" value="a diario" required> A diario
+                    <input type="radio" id="transporte2" name="transporte" value="semanalmente"> Semanalmente
+                    <input type="radio" id="transporte3" name="transporte" value="raramente"> Rara vez
+                    <input type="radio" id="transporte4" name="transporte" value="nunca"> Nunca
+                </div>
+
+                <div class="question">
+                    <label>¿Cuántos días a la semana consumes carne o productos de origen animal?</label>
+                    <input type="radio" id="carne1" name="carne" value="todos los días" required> Todos los días
+                    <input type="radio" id="carne2" name="carne" value="3-4 días a la semana"> 3-4 días a la semana
+                    <input type="radio" id="carne3" name="carne" value="1-2 días a la semana"> 1-2 días a la semana
+                    <input type="radio" id="carne4" name="carne" value="nunca"> Nunca
+                </div>
+
+                <div class="question">
+                    <label>¿Utilizas productos reciclados o reutilizas materiales?</label>
+                    <input type="radio" id="reciclaje1" name="reciclaje" value="si, siempre" required> Sí, siempre
+                    <input type="radio" id="reciclaje2" name="reciclaje" value="a veces"> A veces
+                    <input type="radio" id="reciclaje3" name="reciclaje" value="raramente"> Rara vez
+                    <input type="radio" id="reciclaje4" name="reciclaje" value="nunca"> Nunca
+                </div>
+
+                <div class="question">
+                    <label>¿Cuál es tu fuente principal de energía en el hogar?</label>
+                    <input type="radio" id="energia1" name="energia" value="electricidad de la red" required> Electricidad de la red
+                    <input type="radio" id="energia2" name="energia" value="energía solar"> Energía solar
+                    <input type="radio" id="energia3" name="energia" value="gas natural o carbón"> Gas natural o carbón
+                    <input type="radio" id="energia4" name="energia" value="renovables y otras"> Renovables y otras
+                </div>
+
+                <button type="submit">Enviar Encuesta</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
